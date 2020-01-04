@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h5>父元素</h5>
+        <button @click="++num">父元素按钮{{num}}</button>
+        <hr></hr>
+        <temp :nn="num" :name1="name"></temp>
+    </div>
+    
+    <template id="temp">
+        <div>
+            <h5>子元素</h5>
+            <button>子按钮{{nn}}</button>
+            <p>{{name1}}</p>
+        </div>
+ 
+    </template>
+    <script src="vue.js"></script>
+    <script>
+
+     const temp={
+         template:"#temp",
+         //props:['nn','name1']
+         props:{
+            nn:{
+                //如果数据不是指定的数据类型，那么就报错
+                type:Number,
+                default:0
+            },
+            name1:{
+                //是否必传
+                required:true,
+                validator: function (value) {
+                    return /[\u4e00-\u9fa5]+/.test(value)
+                }
+            }
+     }
+    }
+
+
+        Vue.component('temp', temp)
+
+        new Vue({
+            el: "#app",
+            data: {
+                num:0,
+                name:'我不微笑你别闹'
+            },
+            components:{
+                temp 
+            }
+        })
+    </script>
+</body>
+
+</html>

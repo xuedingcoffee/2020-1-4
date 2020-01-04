@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <pp1></pp1>
+        <pp2></pp2>
+        <temp></temp>
+    </div>
+       <template id="temp">
+      <div>模板{{num}}</div>
+        </template>
+
+    <script src="vue.js"></script>
+    <script>
+        const pp1 = {
+            template: '<div>第一个子组件</div>'
+        }
+        const pp2 = {
+            template: '<div><h5>第二个子组件</h5><pp1></pp1></div>',
+            components: {
+                pp1
+            }
+        }
+        const temp={
+            template:"#temp",
+            data(){
+                return{
+                    num:10
+                }
+            }
+        }
+
+        Vue.component('pp1',pp1)
+        Vue.component('pp2',pp2)
+        Vue.component('temp',temp)
+
+
+
+        new Vue({
+            el: "#app"
+        })
+
+
+    </script>
+</body>
+
+</html>
